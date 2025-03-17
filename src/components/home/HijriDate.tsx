@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from 'lucide-react';
+import { fetchHijriDate } from '@/lib/api';
 
 const HijriDate = () => {
   const [date, setDate] = useState({
@@ -10,20 +11,17 @@ const HijriDate = () => {
   });
 
   useEffect(() => {
-    const fetchHijriDate = async () => {
+    const getHijriDate = async () => {
       try {
-        const response = await fetch('https://api.aladhan.com/v1/gToH');
-        const data = await response.json();
+        const data = await fetchHijriDate();
         
-        if (data.code === 200) {
-          const hijriData = data.data.hijri;
-          const gregorianData = data.data.gregorian;
-          
-          setDate({
-            hijri: `${hijriData.day} ${hijriData.month.ar} ${hijriData.year}`,
-            gregorian: `${gregorianData.day} ${gregorianData.month.en} ${gregorianData.year}`,
-          });
-        }
+        const hijriData = data.hijri;
+        const gregorianData = data.gregorian;
+        
+        setDate({
+          hijri: `${hijriData.day} ${hijriData.month.ar} ${hijriData.year}`,
+          gregorian: `${gregorianData.day} ${gregorianData.month.en} ${gregorianData.year}`,
+        });
       } catch (error) {
         console.error('Error fetching Hijri date:', error);
         
@@ -40,16 +38,16 @@ const HijriDate = () => {
       }
     };
 
-    fetchHijriDate();
+    getHijriDate();
     
     // Set up a timer to update the date every day
-    const timer = setInterval(fetchHijriDate, 86400000); // 24 hours
+    const timer = setInterval(getHijriDate, 86400000); // 24 hours
     
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center">
           <Calendar className="ml-2 h-5 w-5" /> التاريخ اليوم

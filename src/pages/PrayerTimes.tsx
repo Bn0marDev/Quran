@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import PrayerTimesTable from '@/components/prayer/PrayerTimesTable';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const PrayerTimes = () => {
   // Set document title
@@ -17,7 +18,7 @@ const PrayerTimes = () => {
       </h1>
       
       <div className="mb-6">
-        <Card className="p-4 mb-6">
+        <Card className="p-4 mb-6 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
           <CardContent className="p-0 flex items-center">
             <MapPin className="h-5 w-5 ml-2 text-muted-foreground" />
             <p className="text-sm text-muted-foreground">
@@ -26,7 +27,37 @@ const PrayerTimes = () => {
           </CardContent>
         </Card>
         
-        <PrayerTimesTable />
+        <Tabs defaultValue="daily">
+          <TabsList className="mb-4">
+            <TabsTrigger value="daily">اليومية</TabsTrigger>
+            <TabsTrigger value="weekly">الأسبوعية</TabsTrigger>
+            <TabsTrigger value="monthly">الشهرية</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="daily">
+            <PrayerTimesTable />
+          </TabsContent>
+          
+          <TabsContent value="weekly">
+            <Card className="text-center py-12 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
+              <CardContent>
+                <p className="text-muted-foreground">
+                  مواقيت الصلاة الأسبوعية ستكون متاحة قريباً.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="monthly">
+            <Card className="text-center py-12 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
+              <CardContent>
+                <p className="text-muted-foreground">
+                  مواقيت الصلاة الشهرية ستكون متاحة قريباً.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

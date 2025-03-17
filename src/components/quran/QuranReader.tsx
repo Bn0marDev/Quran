@@ -5,17 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Bookmark, BookOpen, ExternalLink, Copy, Volume2 } from 'lucide-react';
 import { useQuran } from '@/hooks/useQuran';
 import AudioPlayer from './AudioPlayer';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface QuranReaderProps {
   surah: any;
 }
 
 const QuranReader = ({ surah }: QuranReaderProps) => {
-  const { getAyahs, loading, error } = useQuran();
+  const { getAyahs, loading, error, recitersList, selectedReciter, setSelectedReciter } = useQuran();
   const [ayahs, setAyahs] = useState<any[]>([]);
   const [displayMode, setDisplayMode] = useState<'text' | 'image'>('text');
   const [showTranslation, setShowTranslation] = useState(true);
   const [selectedAudio, setSelectedAudio] = useState<{ surah: number; ayah: number; url: string } | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('read');
 
   useEffect(() => {
     if (surah) {
@@ -48,7 +50,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
 
   if (!surah) {
     return (
-      <Card className="h-full">
+      <Card className="h-full backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
         <CardContent className="h-full flex items-center justify-center p-6">
           <div className="text-center max-w-md mx-auto">
             <BookOpen className="h-12 w-12 mx-auto opacity-20 mb-4" />
@@ -88,7 +90,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
         <CardContent>
           <div className="text-center text-muted-foreground">
             خطأ في تحميل السورة. يرجى المحاولة مرة أخرى لاحقًا.
-            <Button variant="primary" className="mt-4" onClick={() => window.location.reload()}>
+            <Button variant="secondary" className="mt-4" onClick={() => window.location.reload()}>
               إعادة المحاولة
             </Button>
           </div>
@@ -98,32 +100,25 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
   }
 
   return (
-    <Card className="h-full">
+    <Card className="h-full backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="flex items-center">
+            <span className="arabic ml-2 text-xl">{surah.name}</span>
             <span>{surah.englishName}</span>
-            <span className="arabic mr-2 text-xl">{surah.name}</span>
-            <span className="mr-2 text-sm text-muted-foreground">({surah.number})</span>
+            <span className="ml-2 text-sm text-muted-foreground">({surah.number})</span>
           </CardTitle>
           <p className="text-sm text-muted-foreground mt-1">
             {surah.englishNameTranslation} • {surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية'} • {ayahs.length} آية
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-2">
           <Button 
             variant="outline" 
             size="sm"
             onClick={() => setShowTranslation(!showTranslation)}
           >
             {showTranslation ? 'إخفاء' : 'إظهار'} الترجمة
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => setDisplayMode(displayMode === 'text' ? 'image' : 'text')}
-          >
-            {displayMode === 'text' ? 'عرض الصورة' : 'عرض النص'}
           </Button>
           <Button variant="outline" size="icon">
             <Bookmark className="h-4 w-4" />
@@ -132,8 +127,14 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
       </CardHeader>
       
       <CardContent>
-        {displayMode === 'text' ? (
-          <div className="space-y-6 pb-20">
+        <Tabs defaultValue="read" className="w-full" value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="mb-4 w-full justify-start">
+            <TabsTrigger value="read">القراءة</TabsTrigger>
+            <TabsTrigger value="listen">الاستماع</TabsTrigger>
+            <TabsTrigger value="tafsir">التفسير</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="read" className="space-y-6 pb-20">
             {/* Bismillah header for all surahs except Al-Tawbah (9) */}
             {surah.number !== 9 && (
               <div className="text-center my-6">
@@ -164,7 +165,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
                   </div>
                 </div>
                 
-                <div className="absolute right-6 top-0 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1">
+                <div className="absolute left-6 top-0 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1">
                   <Button 
                     variant="ghost" 
                     size="icon" 
@@ -182,7 +183,6 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
                     <Volume2 className="h-4 w-4" />
                   </Button>
                   
-                  {/* External link using <a> tag instead of Button with as prop */}
                   <a
                     href={`https://quran.com/${surah.number}/${ayah.numberInSurah}`}
                     target="_blank"
@@ -194,12 +194,50 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
                 </div>
               </div>
             ))}
-          </div>
-        ) : (
-          <div className="text-center text-muted-foreground">
-            <p>عرض الصور سيكون متاحًا في تحديث مستقبلي.</p>
-          </div>
-        )}
+          </TabsContent>
+          
+          <TabsContent value="listen">
+            <div className="space-y-4">
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-2">اختيار القارئ</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                  {recitersList.map((reciter) => (
+                    <Button
+                      key={reciter.id}
+                      variant={selectedReciter?.id === reciter.id ? "secondary" : "outline"}
+                      className="justify-start text-right"
+                      onClick={() => setSelectedReciter(reciter)}
+                    >
+                      <span>{reciter.name}</span>
+                      {reciter.style && <span className="text-xs text-muted-foreground mr-2">({reciter.style})</span>}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="text-lg font-medium mb-2">الآيات</h3>
+                {ayahs.map((ayah) => (
+                  <Button
+                    key={ayah.number}
+                    variant="outline"
+                    className="w-full justify-start text-right"
+                    onClick={() => playAudio(ayah)}
+                  >
+                    <span className="ml-2">{ayah.numberInSurah}</span>
+                    <span className="truncate">{ayah.text.substring(0, 50)}...</span>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="tafsir">
+            <div className="text-center p-8">
+              <p className="text-muted-foreground">سيتم توفير التفسير في تحديث قادم</p>
+            </div>
+          </TabsContent>
+        </Tabs>
         
         {selectedAudio && (
           <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-md border-t border-border p-2 z-30">

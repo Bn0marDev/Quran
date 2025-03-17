@@ -6,6 +6,7 @@ import { useHadith } from '@/hooks/useHadith';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const Hadith = () => {
   const { 
@@ -21,6 +22,7 @@ const Hadith = () => {
   const [selectedHadith, setSelectedHadith] = useState<any | null>(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
+  const [activeTab, setActiveTab] = useState('browse');
 
   // Set document title
   useEffect(() => {
@@ -61,73 +63,107 @@ const Hadith = () => {
     }
   };
 
+  const handleSelectCollection = (collection: any) => {
+    setSelectedCollection(collection);
+  };
+
   return (
     <div className="page-container mt-24 animate-fade-in">
       <h1 className="text-3xl font-heading font-bold mb-6">
         الأحاديث النبوية
       </h1>
       
-      <div className="mb-6">
-        <HadithCollection 
-          collections={collections} 
-          selectedCollection={selectedCollection} 
-          onSelectCollection={(collection) => setSelectedCollection(collection)}
-          loading={loading}
-        />
-      </div>
-      
-      {selectedCollection && hadiths && (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {displayedHadiths.map((hadith) => (
-              <div 
-                key={hadith.id} 
-                onClick={() => setSelectedHadith(hadith)}
-                className="cursor-pointer transition-transform hover:-translate-y-1"
-              >
-                <HadithCard hadith={hadith} />
-              </div>
-            ))}
+      <Tabs defaultValue="browse" value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="mb-4">
+          <TabsTrigger value="browse">تصفح الأحاديث</TabsTrigger>
+          <TabsTrigger value="search">البحث</TabsTrigger>
+          <TabsTrigger value="favorites">المفضلة</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="browse">
+          <div className="mb-6">
+            <HadithCollection 
+              collections={collections} 
+              selectedCollection={selectedCollection} 
+              onSelectCollection={handleSelectCollection}
+              loading={loading}
+            />
           </div>
           
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-4 mt-6">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={handlePreviousPage}
-                disabled={page === 1}
-              >
-                <ChevronLeft className="h-4 w-4 mr-1" /> السابق
-              </Button>
+          {selectedCollection && hadiths && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                {displayedHadiths.map((hadith) => (
+                  <div 
+                    key={hadith.id} 
+                    onClick={() => setSelectedHadith(hadith)}
+                    className="cursor-pointer transition-transform hover:-translate-y-1"
+                  >
+                    <HadithCard hadith={hadith} />
+                  </div>
+                ))}
+              </div>
               
-              <span className="text-sm">
-                صفحة {page} من {totalPages}
-              </span>
-              
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={handleNextPage}
-                disabled={page === totalPages}
-              >
-                التالي <ChevronRight className="h-4 w-4 ml-1" />
-              </Button>
-            </div>
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center space-x-4 mt-6">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={handlePreviousPage}
+                    disabled={page === 1}
+                  >
+                    <ChevronLeft className="h-4 w-4 ml-1" /> السابق
+                  </Button>
+                  
+                  <span className="text-sm">
+                    صفحة {page} من {totalPages}
+                  </span>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={handleNextPage}
+                    disabled={page === totalPages}
+                  >
+                    التالي <ChevronRight className="h-4 w-4 mr-1" />
+                  </Button>
+                </div>
+              )}
+            </>
           )}
-        </>
-      )}
-      
-      {!selectedCollection && (
-        <Card className="text-center py-12">
-          <CardContent>
-            <p className="text-muted-foreground">
-              يرجى اختيار مجموعة أحاديث للبدء في القراءة.
-            </p>
-          </CardContent>
-        </Card>
-      )}
+          
+          {!selectedCollection && (
+            <Card className="text-center py-12 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
+              <CardContent>
+                <p className="text-muted-foreground">
+                  يرجى اختيار مجموعة أحاديث للبدء في القراءة.
+                </p>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+        
+        <TabsContent value="search">
+          <Card className="text-center py-12 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
+            <CardContent>
+              <p className="text-muted-foreground">
+                ميزة البحث ستكون متاحة قريباً.
+              </p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="favorites">
+          <Card className="text-center py-12 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
+            <CardContent>
+              <p className="text-muted-foreground">
+                ميزة المفضلة ستكون متاحة قريباً.
+              </p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

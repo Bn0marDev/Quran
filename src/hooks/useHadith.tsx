@@ -36,8 +36,30 @@ const fetchHadithsByCollection = async (collection: string) => {
   if (!collection) return [];
 
   try {
-    // Normally we would call an external API, but for now we'll return mock data
-    // In a real application, replace this with a fetch call to a real API
+    // استعمال API حقيقي لجلب الأحاديث
+    const response = await fetch(`https://api.hadith.gading.dev/books/${collection}?range=1-20`);
+    
+    if (!response.ok) {
+      throw new Error('فشل في جلب الأحاديث');
+    }
+    
+    const data = await response.json();
+    
+    // تحويل البيانات إلى الشكل المطلوب
+    const hadiths = data.hadiths?.map((hadith: any) => ({
+      id: hadith.number.toString(),
+      title: `حديث رقم ${hadith.number}`,
+      text: hadith.arab,
+      translation: hadith.id,
+      number: hadith.number,
+      reference: collection
+    })) || [];
+    
+    return hadiths;
+  } catch (error) {
+    console.error(`Error fetching hadiths for collection ${collection}:`, error);
+    
+    // بيانات وهمية في حالة فشل جلب البيانات
     return [
       {
         id: '1',
@@ -85,9 +107,6 @@ const fetchHadithsByCollection = async (collection: string) => {
         grade: 'صحيح'
       }
     ];
-  } catch (error) {
-    console.error(`Error fetching hadiths for collection ${collection}:`, error);
-    throw error;
   }
 };
 

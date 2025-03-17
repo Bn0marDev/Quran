@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
+import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const location = useLocation();
@@ -11,11 +12,11 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Quran', path: '/quran' },
-    { name: 'Hadith', path: '/hadith' },
-    { name: 'Prayer Times', path: '/prayer-times' },
-    { name: 'Settings', path: '/settings' },
+    { name: 'الرئيسية', path: '/' },
+    { name: 'القرآن', path: '/quran' },
+    { name: 'الأحاديث', path: '/hadith' },
+    { name: 'مواقيت الصلاة', path: '/prayer-times' },
+    { name: 'الإعدادات', path: '/settings' },
   ];
 
   useEffect(() => {
@@ -40,20 +41,20 @@ const Header = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'glass-card py-2' : 'bg-transparent py-4'
+      className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
+        scrolled ? 'backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-white/10 shadow-glass py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link 
           to="/" 
-          className="flex items-center space-x-2 transition-opacity hover:opacity-80"
+          className="flex items-center gap-2 transition-opacity hover:opacity-80"
         >
-          <span className="text-xl font-heading font-medium">Quranic Cornerstone</span>
+          <span className="text-xl font-heading font-medium">القرآن الكريم</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        {/* سطح المكتب */}
+        <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -63,37 +64,43 @@ const Header = () => {
               {item.name}
             </Link>
           ))}
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-accent transition-colors"
-            aria-label="Toggle theme"
+            className="rounded-full"
+            aria-label="تبديل السمة"
           >
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          </Button>
         </nav>
 
-        {/* Mobile Navigation */}
+        {/* الهاتف المحمول */}
         <div className="flex items-center md:hidden">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-accent transition-colors mr-2"
-            aria-label="Toggle theme"
+            className="rounded-full ml-2"
+            aria-label="تبديل السمة"
           >
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 rounded-full hover:bg-accent transition-colors"
-            aria-label="Toggle menu"
+            className="rounded-full"
+            aria-label="فتح/إغلاق القائمة"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </Button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* قائمة الهاتف المحمول */}
       {isMenuOpen && (
-        <div className="md:hidden glass-card mt-2 mx-4 rounded-lg overflow-hidden animate-fade-in">
+        <div className="md:hidden backdrop-blur-md bg-white/80 dark:bg-black/80 mt-2 mx-4 rounded-lg overflow-hidden animate-fade-in">
           <nav className="flex flex-col py-2">
             {navItems.map((item) => (
               <Link

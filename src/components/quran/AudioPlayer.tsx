@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import Button from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { Play, Pause, X, SkipForward, SkipBack, Volume2, Volume1, VolumeX } from 'lucide-react';
 
 interface AudioPlayerProps {
@@ -114,7 +114,7 @@ const AudioPlayer = ({ audioUrl, title, onClose }: AudioPlayerProps) => {
         <Button variant="ghost" size="icon" onClick={togglePlay}>
           {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
         </Button>
-        <div className="ml-2 text-sm font-medium">{title}</div>
+        <div className="mr-2 text-sm font-medium">{title}</div>
       </div>
       
       <div className="flex-1 mx-4">
@@ -133,7 +133,7 @@ const AudioPlayer = ({ audioUrl, title, onClose }: AudioPlayerProps) => {
       </div>
       
       <div className="flex items-center">
-        <div className="hidden sm:flex items-center mr-2">
+        <div className="hidden sm:flex items-center ml-2">
           <Button variant="ghost" size="icon" onClick={toggleMute}>
             <VolumeIcon />
           </Button>

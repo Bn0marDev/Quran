@@ -35,28 +35,28 @@ const Index = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
           <CardContent className="p-6">
             <h2 className="text-xl font-medium mb-3">متابعة قراءة القرآن</h2>
             <p className="text-muted-foreground mb-4">
               استأنف قراءة القرآن من حيث توقفت
             </p>
             <Link to="/quran">
-              <Button variant="primary" className="w-full">
+              <Button variant="default" className="w-full">
                 قراءة القرآن <ArrowRight className="mr-2 h-4 w-4" />
               </Button>
             </Link>
           </CardContent>
         </Card>
         
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
           <CardContent className="p-6">
             <h2 className="text-xl font-medium mb-3">استكشاف الأحاديث</h2>
             <p className="text-muted-foreground mb-4">
               اكتشف الأحاديث الصحيحة للنبي محمد ﷺ
             </p>
             <Link to="/hadith">
-              <Button variant="primary" className="w-full">
+              <Button variant="default" className="w-full">
                 تصفح الأحاديث <ArrowRight className="mr-2 h-4 w-4" />
               </Button>
             </Link>

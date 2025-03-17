@@ -1,40 +1,40 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Book, BookOpen, Clock, Settings } from 'lucide-react';
 
 const QuickLinks = () => {
   const links = [
     { 
-      name: 'Quran', 
+      name: 'القرآن الكريم', 
       path: '/quran', 
       icon: <BookOpen className="w-6 h-6" />,
-      description: 'Read and listen to the Quran' 
+      description: 'قراءة واستماع للقرآن الكريم' 
     },
     { 
-      name: 'Hadith', 
+      name: 'الأحاديث', 
       path: '/hadith', 
       icon: <Book className="w-6 h-6" />,
-      description: 'Read authentic Hadiths' 
+      description: 'قراءة الأحاديث النبوية' 
     },
     { 
-      name: 'Prayer Times', 
+      name: 'مواقيت الصلاة', 
       path: '/prayer-times', 
       icon: <Clock className="w-6 h-6" />,
-      description: 'Check prayer times for your location' 
+      description: 'التحقق من أوقات الصلاة في موقعك' 
     },
     { 
-      name: 'Settings', 
+      name: 'الإعدادات', 
       path: '/settings', 
       icon: <Settings className="w-6 h-6" />,
-      description: 'Customize your experience' 
+      description: 'تخصيص تجربتك' 
     }
   ];
 
   return (
-    <Card glass hover className="overflow-hidden">
+    <Card className="overflow-hidden backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass">
       <CardHeader className="pb-3">
-        <CardTitle>Quick Links</CardTitle>
+        <CardTitle>روابط سريعة</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border">
@@ -44,7 +44,7 @@ const QuickLinks = () => {
               to={link.path}
               className="p-6 hover:bg-accent/50 transition-colors flex flex-col items-center justify-center text-center"
             >
-              <div className="rounded-full bg-secondary p-3 mb-3 transition-transform transform group-hover:scale-110">
+              <div className="rounded-full bg-secondary p-3 mb-3 transition-transform transform hover:scale-110">
                 {link.icon}
               </div>
               <h3 className="font-medium">{link.name}</h3>
