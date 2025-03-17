@@ -20,8 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["Inter", "Helvetica", "Arial", "sans-serif"],
-				heading: ["Playfair Display", "serif"],
+				sans: ["Tajawal", "Inter", "Helvetica", "Arial", "sans-serif"],
+				heading: ["Tajawal", "Playfair Display", "serif"],
 				arabic: ["Amiri", "serif"],
 			},
 			colors: {

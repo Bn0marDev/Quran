@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { MapPin, Calendar, Clock, Bell, BellOff } from 'lucide-react';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 
@@ -34,7 +34,7 @@ const PrayerTimesTable = () => {
   const formatTime = (timeString: string) => {
     if (!timeString) return '--:--';
     const date = new Date(timeString);
-    return date.toLocaleTimeString([], { 
+    return date.toLocaleTimeString('ar-SA', { 
       hour: '2-digit', 
       minute: '2-digit', 
       hour12: true 
@@ -66,12 +66,12 @@ const PrayerTimesTable = () => {
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="flex items-center">
-            <Clock className="mr-2 h-5 w-5" /> Prayer Times
+            <Clock className="ml-2 h-5 w-5" /> مواقيت الصلاة
           </CardTitle>
           <div className="text-sm">
             <span className="text-muted-foreground mr-2">
-              <Calendar className="inline-block mr-1 h-4 w-4" />
-              {date ? new Date(date).toLocaleDateString() : 'Today'}
+              <Calendar className="inline-block ml-1 h-4 w-4" />
+              {date ? new Date(date).toLocaleDateString('ar-SA') : 'اليوم'}
             </span>
           </div>
         </div>
@@ -79,11 +79,11 @@ const PrayerTimesTable = () => {
       <CardContent>
         <div className="flex items-center justify-between mb-4 text-sm bg-secondary/30 p-3 rounded-md">
           <div className="flex items-center">
-            <MapPin className="h-4 w-4 mr-1" />
-            {location?.city || 'Location not set'}
+            <MapPin className="h-4 w-4 ml-1" />
+            {location?.city || 'الموقع غير محدد'}
           </div>
           <Button size="sm" variant="outline" onClick={handleDetectLocation}>
-            {loading ? 'Detecting...' : 'Detect Location'}
+            {loading ? 'جاري التحديد...' : 'تحديد الموقع'}
           </Button>
         </div>
 
@@ -96,10 +96,10 @@ const PrayerTimesTable = () => {
         ) : error ? (
           <div className="text-center py-8">
             <p className="text-muted-foreground mb-3">
-              Unable to load prayer times. Please check your location settings.
+              تعذر تحميل مواقيت الصلاة. يرجى التحقق من إعدادات الموقع.
             </p>
             <Button variant="primary" onClick={handleDetectLocation}>
-              Retry with Location
+              إعادة المحاولة مع تحديد الموقع
             </Button>
           </div>
         ) : (
@@ -112,14 +112,21 @@ const PrayerTimesTable = () => {
                   className="flex items-center justify-between py-4"
                 >
                   <div>
-                    <div className="font-medium">{name}</div>
+                    <div className="font-medium">
+                      {name === 'Fajr' ? 'الفجر' : 
+                       name === 'Sunrise' ? 'الشروق' :
+                       name === 'Dhuhr' ? 'الظهر' : 
+                       name === 'Asr' ? 'العصر' : 
+                       name === 'Maghrib' ? 'المغرب' : 
+                       name === 'Isha' ? 'العشاء' : name}
+                    </div>
                     {name !== 'Sunrise' && (
                       <div className="text-xs text-muted-foreground">
-                        {name === 'Fajr' ? 'Dawn Prayer' : 
-                         name === 'Dhuhr' ? 'Noon Prayer' : 
-                         name === 'Asr' ? 'Afternoon Prayer' : 
-                         name === 'Maghrib' ? 'Sunset Prayer' : 
-                         name === 'Isha' ? 'Night Prayer' : ''}
+                        {name === 'Fajr' ? 'صلاة الفجر' : 
+                         name === 'Dhuhr' ? 'صلاة الظهر' : 
+                         name === 'Asr' ? 'صلاة العصر' : 
+                         name === 'Maghrib' ? 'صلاة المغرب' : 
+                         name === 'Isha' ? 'صلاة العشاء' : ''}
                       </div>
                     )}
                   </div>
@@ -131,7 +138,7 @@ const PrayerTimesTable = () => {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="ml-2"
+                        className="mr-2"
                         onClick={() => toggleNotification(name)}
                       >
                         {notifications[name] ? 

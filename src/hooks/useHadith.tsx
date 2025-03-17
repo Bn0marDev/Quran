@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from '@/components/ui/use-toast';
 
 // Define types for Hadith data
-type HadithCollection = {
+export type HadithCollection = {
   id: string;
   name: string;
   hadiths_count: number;
@@ -21,14 +21,14 @@ type Hadith = {
 };
 
 const HADITH_COLLECTIONS = [
-  { id: 'bukhari', name: 'Sahih al-Bukhari', hadiths_count: 7563 },
-  { id: 'muslim', name: 'Sahih Muslim', hadiths_count: 5362 },
-  { id: 'abu-dawud', name: 'Sunan Abi Dawud', hadiths_count: 4590 },
-  { id: 'tirmidhi', name: 'Jami\' at-Tirmidhi', hadiths_count: 3891 },
-  { id: 'nasai', name: 'Sunan an-Nasa\'i', hadiths_count: 5662 },
-  { id: 'ibn-majah', name: 'Sunan Ibn Majah', hadiths_count: 4332 },
-  { id: 'malik', name: 'Muwatta Malik', hadiths_count: 1594 },
-  { id: 'riyad', name: 'Riyad as-Saliheen', hadiths_count: 1896 }
+  { id: 'bukhari', name: 'صحيح البخاري', hadiths_count: 7563 },
+  { id: 'muslim', name: 'صحيح مسلم', hadiths_count: 5362 },
+  { id: 'abu-dawud', name: 'سنن أبي داود', hadiths_count: 4590 },
+  { id: 'tirmidhi', name: 'جامع الترمذي', hadiths_count: 3891 },
+  { id: 'nasai', name: 'سنن النسائي', hadiths_count: 5662 },
+  { id: 'ibn-majah', name: 'سنن ابن ماجه', hadiths_count: 4332 },
+  { id: 'malik', name: 'موطأ مالك', hadiths_count: 1594 },
+  { id: 'riyad', name: 'رياض الصالحين', hadiths_count: 1896 }
 ];
 
 // Function to fetch hadiths by collection
@@ -41,48 +41,48 @@ const fetchHadithsByCollection = async (collection: string) => {
     return [
       {
         id: '1',
-        title: 'The Book of Faith',
-        text: 'Umar ibn al-Khattab reported: We were sitting with the Messenger of Allah, peace and blessings be upon him, one day when a man with very white clothes and very black hair came to us. There were no signs of travel on him and none of us recognized him. He sat down in front of the Prophet, rested his knees against the knees of the Prophet, and placed his hands on the thighs of the Prophet. The man said, "O Muhammad, tell me about Islam." The Prophet said, "Islam is to testify there is no God but Allah and Muhammad is the Messenger of Allah, to establish prayer, to give charity, to fast the month of Ramadan, and to perform pilgrimage to the House if you have the means."',
-        chapter: 'Faith',
+        title: 'كتاب الإيمان',
+        text: 'عن عمر بن الخطاب رضي الله عنه قال: بينما نحن جلوس عند رسول الله صلى الله عليه وسلم ذات يوم إذ طلع علينا رجل شديد بياض الثياب شديد سواد الشعر لا يرى عليه أثر السفر ولا يعرفه منا أحد حتى جلس إلى النبي صلى الله عليه وسلم فأسند ركبتيه إلى ركبتيه ووضع كفيه على فخذيه وقال: يا محمد أخبرني عن الإسلام. فقال رسول الله صلى الله عليه وسلم: "الإسلام أن تشهد أن لا إله إلا الله وأن محمداً رسول الله وتقيم الصلاة وتؤتي الزكاة وتصوم رمضان وتحج البيت إن استطعت إليه سبيلا".',
+        chapter: 'الإيمان',
         number: 1,
-        reference: 'Bukhari 1, Muslim 8',
-        grade: 'Sahih'
+        reference: 'البخاري 1، مسلم 8',
+        grade: 'صحيح'
       },
       {
         id: '2',
-        title: 'Deeds are by Intentions',
-        text: 'Umar ibn Al-Khattab reported: The Messenger of Allah, peace and blessings be upon him, said, "Verily, deeds are only with intentions. Verily, every person will have only what they intended. Whoever emigrated to Allah and his messenger, then his emigration is for Allah and his messenger. Whoever emigrated to get something in the world or to marry a woman, then his emigration is for whatever he emigrated for."',
-        chapter: 'Revelation',
+        title: 'إنما الأعمال بالنيات',
+        text: 'عن عمر بن الخطاب رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "إنما الأعمال بالنيات وإنما لكل امرئ ما نوى. فمن كانت هجرته إلى الله ورسوله فهجرته إلى الله ورسوله، ومن كانت هجرته لدنيا يصيبها أو امرأة ينكحها فهجرته إلى ما هاجر إليه".',
+        chapter: 'الوحي',
         number: 1,
-        reference: 'Bukhari 1, Muslim 1907',
-        grade: 'Sahih'
+        reference: 'البخاري 1، مسلم 1907',
+        grade: 'صحيح'
       },
       {
         id: '3',
-        title: 'The Angel of Death',
-        text: 'Abu Huraira reported: The Messenger of Allah, peace and blessings be upon him, said, "The Angel of Death used to come visibly to people to take their souls, so he came to Moses, upon him be peace. Moses struck him and knocked out his eye. The angel returned to Allah, saying: You have sent me to a servant who does not want to die. Allah restored his eye and said: Return to him and tell him to place his hand on the back of an ox, for every hair his hand touches will be a year he may live."',
-        chapter: 'Prophets',
+        title: 'ملك الموت',
+        text: 'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "كان ملك الموت يأتي الناس عياناً، فأتى موسى عليه السلام فلطمه ففقأ عينه، فرجع إلى ربه فقال: أرسلتني إلى عبد لا يريد الموت. فرد الله عليه عينه وقال: ارجع إليه وقل له يضع يده على متن ثور، فله بكل شعرة تغطيها يده سنة يعيشها".',
+        chapter: 'الأنبياء',
         number: 339,
-        reference: 'Bukhari 3407, Muslim 2372',
-        grade: 'Sahih'
+        reference: 'البخاري 3407، مسلم 2372',
+        grade: 'صحيح'
       },
       {
         id: '4',
-        title: 'The Seven Destructive Sins',
-        text: 'Abu Huraira reported: The Messenger of Allah, peace and blessings be upon him, said, "Avoid the seven destructive sins." They asked, "O Messenger of Allah, what are they?" The Prophet said, "Associating partners with Allah, magic, killing a soul that Allah has forbidden except by right, consuming usury, consuming the wealth of an orphan, fleeing from the battlefield, and slandering chaste, unwary, believing women."',
-        chapter: 'Faith',
+        title: 'السبع الموبقات',
+        text: 'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "اجتنبوا السبع الموبقات". قالوا: يا رسول الله وما هن؟ قال: "الشرك بالله، والسحر، وقتل النفس التي حرم الله إلا بالحق، وأكل الربا، وأكل مال اليتيم، والتولي يوم الزحف، وقذف المحصنات المؤمنات الغافلات".',
+        chapter: 'الإيمان',
         number: 85,
-        reference: 'Bukhari 2766, Muslim 89',
-        grade: 'Sahih'
+        reference: 'البخاري 2766، مسلم 89',
+        grade: 'صحيح'
       },
       {
         id: '5',
-        title: 'Five Natural Practices',
-        text: 'Abu Huraira reported: The Messenger of Allah, peace and blessings be upon him, said, "Five practices are from natural instinct: circumcision, shaving the pubic hair, clipping the nails, plucking the underarm hair, and trimming the mustache."',
-        chapter: 'Purification',
+        title: 'خمس من الفطرة',
+        text: 'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "خمس من الفطرة: الختان، والاستحداد، وقص الشارب، ونتف الإبط، وتقليم الأظفار".',
+        chapter: 'الطهارة',
         number: 53,
-        reference: 'Bukhari 5889, Muslim 257',
-        grade: 'Sahih'
+        reference: 'البخاري 5889، مسلم 257',
+        grade: 'صحيح'
       }
     ];
   } catch (error) {
@@ -118,8 +118,8 @@ export const useHadith = () => {
       refetch();
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to fetch hadiths. Please try again later.',
+        title: 'خطأ',
+        description: 'فشل في جلب الأحاديث. يرجى المحاولة مرة أخرى لاحقًا.',
         variant: 'destructive'
       });
     }

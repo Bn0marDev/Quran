@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Bookmark, BookOpen, ExternalLink, Copy, Volume2 } from 'lucide-react';
 import { useQuran } from '@/hooks/useQuran';
 import AudioPlayer from './AudioPlayer';
@@ -52,9 +52,9 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
         <CardContent className="h-full flex items-center justify-center p-6">
           <div className="text-center max-w-md mx-auto">
             <BookOpen className="h-12 w-12 mx-auto opacity-20 mb-4" />
-            <h3 className="text-xl font-medium mb-2">Select a Surah</h3>
+            <h3 className="text-xl font-medium mb-2">اختر سورة</h3>
             <p className="text-muted-foreground">
-              Choose a Surah from the list to begin reading the Quran.
+              اختر سورة من القائمة للبدء في قراءة القرآن الكريم.
             </p>
           </div>
         </CardContent>
@@ -66,7 +66,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
     return (
       <Card className="h-full animate-pulse">
         <CardHeader>
-          <CardTitle>Loading Surah...</CardTitle>
+          <CardTitle>جاري تحميل السورة...</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -83,13 +83,13 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
     return (
       <Card className="h-full">
         <CardHeader>
-          <CardTitle>Error</CardTitle>
+          <CardTitle>خطأ</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center text-muted-foreground">
-            Error loading Surah. Please try again later.
+            خطأ في تحميل السورة. يرجى المحاولة مرة أخرى لاحقًا.
             <Button variant="primary" className="mt-4" onClick={() => window.location.reload()}>
-              Retry
+              إعادة المحاولة
             </Button>
           </div>
         </CardContent>
@@ -103,11 +103,11 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
         <div>
           <CardTitle className="flex items-center">
             <span>{surah.englishName}</span>
-            <span className="arabic ml-2 text-xl">{surah.name}</span>
-            <span className="ml-2 text-sm text-muted-foreground">({surah.number})</span>
+            <span className="arabic mr-2 text-xl">{surah.name}</span>
+            <span className="mr-2 text-sm text-muted-foreground">({surah.number})</span>
           </CardTitle>
           <p className="text-sm text-muted-foreground mt-1">
-            {surah.englishNameTranslation} • {surah.revelationType} • {ayahs.length} verses
+            {surah.englishNameTranslation} • {surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية'} • {ayahs.length} آية
           </p>
         </div>
         <div className="flex items-center space-x-2">
@@ -116,14 +116,14 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
             size="sm"
             onClick={() => setShowTranslation(!showTranslation)}
           >
-            {showTranslation ? 'Hide' : 'Show'} Translation
+            {showTranslation ? 'إخفاء' : 'إظهار'} الترجمة
           </Button>
           <Button 
             variant="outline" 
             size="sm"
             onClick={() => setDisplayMode(displayMode === 'text' ? 'image' : 'text')}
           >
-            {displayMode === 'text' ? 'Image View' : 'Text View'}
+            {displayMode === 'text' ? 'عرض الصورة' : 'عرض النص'}
           </Button>
           <Button variant="outline" size="icon">
             <Bookmark className="h-4 w-4" />
@@ -140,7 +140,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
                 <p className="arabic text-2xl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
                 {showTranslation && (
                   <p className="text-sm text-muted-foreground mt-2">
-                    In the name of Allah, the Entirely Merciful, the Especially Merciful
+                    بسم الله الرحمن الرحيم
                   </p>
                 )}
               </div>
@@ -149,7 +149,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
             {ayahs.map((ayah) => (
               <div key={ayah.number} className="group relative border-b border-border pb-6 transition-colors hover:bg-accent/10 -mx-6 px-6">
                 <div className="flex items-start">
-                  <div className="flex items-center justify-center h-8 w-8 rounded-full bg-secondary shrink-0 mr-3 mt-1 text-sm">
+                  <div className="flex items-center justify-center h-8 w-8 rounded-full bg-secondary shrink-0 ml-3 mt-1 text-sm">
                     {ayah.numberInSurah}
                   </div>
                   <div>
@@ -181,6 +181,8 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
                   >
                     <Volume2 className="h-4 w-4" />
                   </Button>
+                  
+                  {/* External link using <a> tag instead of Button with as prop */}
                   <a
                     href={`https://quran.com/${surah.number}/${ayah.numberInSurah}`}
                     target="_blank"
@@ -195,7 +197,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
           </div>
         ) : (
           <div className="text-center text-muted-foreground">
-            <p>Image view will be available in a future update.</p>
+            <p>عرض الصور سيكون متاحًا في تحديث مستقبلي.</p>
           </div>
         )}
         
@@ -203,7 +205,7 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
           <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-md border-t border-border p-2 z-30">
             <AudioPlayer 
               audioUrl={selectedAudio.url} 
-              title={`${surah.englishName} - Ayah ${selectedAudio.ayah}`}
+              title={`${surah.englishName} - آية ${selectedAudio.ayah}`}
               onClose={() => setSelectedAudio(null)}
             />
           </div>

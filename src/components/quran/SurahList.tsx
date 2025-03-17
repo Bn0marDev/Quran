@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { useQuran } from '@/hooks/useQuran';
 
@@ -20,7 +20,7 @@ const SurahList = ({ onSelectSurah, selectedSurah }: SurahListProps) => {
     
     if (searchTerm) {
       const filtered = surahs.filter(surah => 
-        surah.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        surah.name.includes(searchTerm) ||
         surah.englishName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         surah.number.toString().includes(searchTerm)
       );
@@ -34,7 +34,7 @@ const SurahList = ({ onSelectSurah, selectedSurah }: SurahListProps) => {
     return (
       <Card className="h-full animate-pulse">
         <CardHeader>
-          <CardTitle>Surahs</CardTitle>
+          <CardTitle>السور</CardTitle>
           <div className="h-10 bg-secondary/50 rounded-md w-full mt-2"></div>
         </CardHeader>
         <CardContent>
@@ -52,13 +52,13 @@ const SurahList = ({ onSelectSurah, selectedSurah }: SurahListProps) => {
     return (
       <Card className="h-full">
         <CardHeader>
-          <CardTitle>Surahs</CardTitle>
+          <CardTitle>السور</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center text-muted-foreground">
-            Error loading Surahs. Please try again later.
+            خطأ في تحميل السور. يرجى المحاولة مرة أخرى لاحقًا.
             <Button variant="primary" className="mt-4" onClick={() => window.location.reload()}>
-              Retry
+              إعادة المحاولة
             </Button>
           </div>
         </CardContent>
@@ -69,37 +69,37 @@ const SurahList = ({ onSelectSurah, selectedSurah }: SurahListProps) => {
   return (
     <Card className="h-full">
       <CardHeader>
-        <CardTitle>Surahs</CardTitle>
+        <CardTitle>السور</CardTitle>
         <div className="relative mt-2">
           <input
             type="text"
-            placeholder="Search surah..."
-            className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+            placeholder="البحث عن سورة..."
+            className="w-full h-10 pr-10 pl-4 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         </div>
       </CardHeader>
       <CardContent>
-        <div className="space-y-1 max-h-[calc(100vh-250px)] overflow-y-auto pr-2 -mr-2">
+        <div className="space-y-1 max-h-[calc(100vh-250px)] overflow-y-auto pl-2 -ml-2">
           {filteredSurahs.map((surah) => (
             <button
               key={surah.number}
-              className={`w-full text-left px-4 py-3 rounded-md transition-colors hover:bg-accent ${
+              className={`w-full text-right px-4 py-3 rounded-md transition-colors hover:bg-accent ${
                 selectedSurah?.number === surah.number ? 'bg-primary/10 text-primary' : ''
               }`}
               onClick={() => onSelectSurah(surah)}
             >
               <div className="flex items-center">
-                <div className="flex items-center justify-center h-8 w-8 mr-3 rounded-full bg-secondary text-sm">
+                <div className="flex items-center justify-center h-8 w-8 ml-3 rounded-full bg-secondary text-sm">
                   {surah.number}
                 </div>
                 <div>
-                  <div className="font-medium">{surah.englishName}</div>
+                  <div className="font-medium arabic text-base">{surah.name}</div>
                   <div className="text-sm text-muted-foreground flex items-center justify-between">
-                    <span>{surah.englishNameTranslation}</span>
-                    <span className="arabic text-base">{surah.name}</span>
+                    <span>{surah.englishNameTranslation === 'The Opening' ? 'الفاتحة' : surah.englishNameTranslation}</span>
+                    <span className="mr-2">{surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية'}</span>
                   </div>
                 </div>
               </div>

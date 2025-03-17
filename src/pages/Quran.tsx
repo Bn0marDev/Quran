@@ -9,8 +9,8 @@ const Quran = () => {
   // Set document title
   useEffect(() => {
     document.title = selectedSurah 
-      ? `${selectedSurah.englishName} - Quranic Cornerstone` 
-      : 'Quran - Quranic Cornerstone';
+      ? `${selectedSurah.name} - القرآن الكريم` 
+      : 'القرآن الكريم';
   }, [selectedSurah]);
 
   // Check for last read surah in localStorage
@@ -35,7 +35,7 @@ const Quran = () => {
   return (
     <div className="page-container mt-24 animate-fade-in">
       <h1 className="text-3xl font-heading font-bold mb-6">
-        The Noble Quran
+        القرآن الكريم
       </h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

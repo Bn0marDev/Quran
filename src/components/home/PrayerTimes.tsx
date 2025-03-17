@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Clock } from 'lucide-react';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 
@@ -17,7 +17,7 @@ const PrayerTimes = () => {
   }, []);
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], { 
+    return date.toLocaleTimeString('ar-SA', { 
       hour: '2-digit', 
       minute: '2-digit', 
       hour12: true 
@@ -26,22 +26,22 @@ const PrayerTimes = () => {
 
   // Calculate time remaining for next prayer
   const getTimeRemaining = () => {
-    if (!nextPrayer || !nextPrayer.time) return 'Calculating...';
+    if (!nextPrayer || !nextPrayer.time) return 'جاري الحساب...';
     
     const now = currentTime.getTime();
     const prayerTime = new Date(nextPrayer.time).getTime();
     
     // If prayer time has passed, show "Now"
-    if (prayerTime < now) return 'Now';
+    if (prayerTime < now) return 'الآن';
     
     const diff = prayerTime - now;
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     
     if (hours > 0) {
-      return `${hours}h ${minutes}m`;
+      return `${hours} ساعة ${minutes} دقيقة`;
     } else {
-      return `${minutes}m`;
+      return `${minutes} دقيقة`;
     }
   };
 
@@ -49,7 +49,7 @@ const PrayerTimes = () => {
     <Card className="overflow-hidden">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center">
-          <Clock className="mr-2 h-5 w-5" /> Prayer Times
+          <Clock className="ml-2 h-5 w-5" /> مواقيت الصلاة
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -61,16 +61,16 @@ const PrayerTimes = () => {
           </div>
         ) : error ? (
           <div className="text-center text-sm text-muted-foreground">
-            Unable to load prayer times. Please check your location settings.
+            تعذر تحميل مواقيت الصلاة. يرجى التحقق من إعدادات الموقع.
           </div>
         ) : (
           <div className="space-y-3">
             <div className="text-center">
-              <div className="text-sm text-muted-foreground">Next Prayer</div>
-              <div className="text-2xl font-medium mt-1">{nextPrayer?.name || 'Calculating...'}</div>
-              <div className="text-lg">{nextPrayer?.timeFormatted || 'Loading...'}</div>
+              <div className="text-sm text-muted-foreground">الصلاة القادمة</div>
+              <div className="text-2xl font-medium mt-1">{nextPrayer?.name || 'جاري الحساب...'}</div>
+              <div className="text-lg">{nextPrayer?.timeFormatted || 'جاري التحميل...'}</div>
               <div className="text-sm text-muted-foreground mt-1">
-                Time remaining: <span className="font-medium">{getTimeRemaining()}</span>
+                الوقت المتبقي: <span className="font-medium">{getTimeRemaining()}</span>
               </div>
             </div>
             
@@ -83,9 +83,15 @@ const PrayerTimes = () => {
                       key={name} 
                       className={`p-2 rounded-md ${nextPrayer?.name === name ? 'bg-primary/10 text-primary' : ''}`}
                     >
-                      <div className="font-medium">{name}</div>
+                      <div className="font-medium">
+                        {name === 'Fajr' ? 'الفجر' : 
+                         name === 'Dhuhr' ? 'الظهر' : 
+                         name === 'Asr' ? 'العصر' : 
+                         name === 'Maghrib' ? 'المغرب' : 
+                         name === 'Isha' ? 'العشاء' : name}
+                      </div>
                       <div className="text-xs text-muted-foreground">
-                        {time ? new Date(time).toLocaleTimeString([], { 
+                        {time ? new Date(time).toLocaleTimeString('ar-SA', { 
                           hour: '2-digit', 
                           minute: '2-digit', 
                           hour12: true 

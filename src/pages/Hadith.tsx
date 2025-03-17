@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import HadithCollection from '@/components/hadith/HadithCollection';
 import HadithCard from '@/components/hadith/HadithCard';
 import { useHadith } from '@/hooks/useHadith';
-import { Card, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Hadith = () => {
@@ -24,7 +24,7 @@ const Hadith = () => {
 
   // Set document title
   useEffect(() => {
-    document.title = 'Hadiths - Quranic Cornerstone';
+    document.title = 'الأحاديث النبوية - القرآن الكريم';
   }, []);
 
   useEffect(() => {
@@ -64,14 +64,14 @@ const Hadith = () => {
   return (
     <div className="page-container mt-24 animate-fade-in">
       <h1 className="text-3xl font-heading font-bold mb-6">
-        Hadith Collections
+        الأحاديث النبوية
       </h1>
       
       <div className="mb-6">
         <HadithCollection 
           collections={collections} 
           selectedCollection={selectedCollection} 
-          onSelectCollection={setSelectedCollection}
+          onSelectCollection={(collection) => setSelectedCollection(collection)}
           loading={loading}
         />
       </div>
@@ -99,11 +99,11 @@ const Hadith = () => {
                 onClick={handlePreviousPage}
                 disabled={page === 1}
               >
-                <ChevronLeft className="h-4 w-4 mr-1" /> Previous
+                <ChevronLeft className="h-4 w-4 mr-1" /> السابق
               </Button>
               
               <span className="text-sm">
-                Page {page} of {totalPages}
+                صفحة {page} من {totalPages}
               </span>
               
               <Button 
@@ -112,7 +112,7 @@ const Hadith = () => {
                 onClick={handleNextPage}
                 disabled={page === totalPages}
               >
-                Next <ChevronRight className="h-4 w-4 ml-1" />
+                التالي <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </div>
           )}
@@ -123,7 +123,7 @@ const Hadith = () => {
         <Card className="text-center py-12">
           <CardContent>
             <p className="text-muted-foreground">
-              Please select a hadith collection to begin reading.
+              يرجى اختيار مجموعة أحاديث للبدء في القراءة.
             </p>
           </CardContent>
         </Card>
