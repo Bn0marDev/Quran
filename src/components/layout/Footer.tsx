@@ -16,12 +16,12 @@ const Footer = () => {
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Quick Links</h3>
+            <h3 className="text-lg font-medium">روابط سريعة</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li><Link to="/quran" className="hover:text-primary transition-colors">Quran</Link></li>
-              <li><Link to="/hadith" className="hover:text-primary transition-colors">Hadith</Link></li>
-              <li><Link to="/prayer-times" className="hover:text-primary transition-colors">Prayer Times</Link></li>
+              <li><Link to="/" className="hover:text-primary transition-colors">الرئيسية</Link></li>
+              <li><Link to="/quran" className="hover:text-primary transition-colors">القرآن</Link></li>
+              <li><Link to="/hadith" className="hover:text-primary transition-colors">الحديث</Link></li>
+              <li><Link to="/prayer-times" className="hover:text-primary transition-colors">أوقات الصلاة</Link></li>
             </ul>
           </div>
           
@@ -35,10 +35,10 @@ const Footer = () => {
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Settings</h3>
+            <h3 className="text-lg font-medium">الإعدادات</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/settings" className="hover:text-primary transition-colors">Preferences</Link></li>
-              <li><button className="hover:text-primary transition-colors">Clear Cache</button></li>
+              <li><Link to="/settings" className="hover:text-primary transition-colors">التفضيلات</Link></li>
+              <li><button className="hover:text-primary transition-colors">مسح الذاكرة المؤقتة</button></li>
             </ul>
           </div>
         </div>
