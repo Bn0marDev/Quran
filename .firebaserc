@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "ahadith-sdbc",
+    "main": "ahadith-sdbc"
+  },
+  "targets": {},
+  "etags": {}
+}
