@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Resources</h3>
+            <h3 className="text-lg font-medium">مصادر الآيات والتفسيرات</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="https://quran.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Quran.com</a></li>
               <li><a href="https://sunnah.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Sunnah.com</a></li>
