@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { MapPin, Calendar, Clock, Bell, BellOff } from 'lucide-react';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
@@ -62,7 +62,7 @@ const PrayerTimesTable = () => {
   };
 
   return (
-    <Card glass hover className="overflow-hidden">
+    <Card className="overflow-hidden">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="flex items-center">

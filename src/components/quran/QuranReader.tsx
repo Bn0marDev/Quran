@@ -181,17 +181,14 @@ const QuranReader = ({ surah }: QuranReaderProps) => {
                   >
                     <Volume2 className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8"
-                    as="a"
+                  <a
                     href={`https://quran.com/${surah.number}/${ayah.numberInSurah}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center h-8 w-8 rounded-md hover:bg-accent/50"
                   >
                     <ExternalLink className="h-4 w-4" />
-                  </Button>
+                  </a>
                 </div>
               </div>
             ))}

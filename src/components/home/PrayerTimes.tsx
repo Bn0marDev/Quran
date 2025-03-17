@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Clock } from 'lucide-react';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 
@@ -46,7 +46,7 @@ const PrayerTimes = () => {
   };
 
   return (
-    <Card glass hover className="overflow-hidden">
+    <Card className="overflow-hidden">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center">
           <Clock className="mr-2 h-5 w-5" /> Prayer Times
