@@ -1,6 +1,6 @@
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { TikTok } from 'react-icons/tiktok'; // تأكد من تثبيت مكتبة الأيقونات
+import { TikTok } from 'lucide-react'; // استخدام أيقونة TikTok من مكتبة lucide-react
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -47,7 +47,7 @@ const Footer = () => {
         <div className="border-t border-border mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
             <a href="https://www.tiktok.com/@m0usa_0mar" target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <TikTok className="mr-2" />
+              <TikTok className="mr-2" /> {/* استخدام أيقونة TikTok */}
               m0usa_0mar
               <VerifiedIcon className="ml-2" /> {/* تأكد من تثبيت الأيقونة المناسبة للتوثيق */}
             </a>
