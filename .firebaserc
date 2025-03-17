@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "ahadith-sdbc",
-    "main": "ahadith-sdbc"
+    "main": "ahadith-sdbc",
+    "bn": "ahadith-sdbc"
   },
   "targets": {},
   "etags": {}
