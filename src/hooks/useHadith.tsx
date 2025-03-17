@@ -111,7 +111,7 @@ const fetchHadithsByCollection = async (collection: string) => {
 };
 
 export const useHadith = () => {
-  const [selectedCollection, setSelectedCollection] = useState<HadithCollection | null>(null);
+  const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
 
   // Fetch collections (in a real app, this would come from an API)
   const collections = HADITH_COLLECTIONS;
@@ -123,8 +123,8 @@ export const useHadith = () => {
     error,
     refetch
   } = useQuery({
-    queryKey: ['hadiths', selectedCollection?.id],
-    queryFn: () => fetchHadithsByCollection(selectedCollection?.id || ''),
+    queryKey: ['hadiths', selectedCollection],
+    queryFn: () => fetchHadithsByCollection(selectedCollection || ''),
     enabled: !!selectedCollection,
     staleTime: 1000 * 60 * 60, // 1 hour
     refetchOnWindowFocus: false

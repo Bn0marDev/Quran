@@ -63,8 +63,8 @@ const Hadith = () => {
     }
   };
 
-  const handleSelectCollection = (collection: any) => {
-    setSelectedCollection(collection);
+  const handleSelectCollection = (collectionId: string) => {
+    setSelectedCollection(collectionId);
   };
 
   return (

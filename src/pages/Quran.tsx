@@ -4,6 +4,7 @@ import SurahList from '@/components/quran/SurahList';
 import QuranReader from '@/components/quran/QuranReader';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QuranProvider } from '@/hooks/useQuran';
+import { X } from 'lucide-react';
 
 const Quran = () => {
   const [selectedSurah, setSelectedSurah] = useState<any | null>(null);
