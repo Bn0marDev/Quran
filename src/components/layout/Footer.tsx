@@ -1,4 +1,3 @@
-
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -49,7 +48,7 @@ const Footer = () => {
             &copy; {year} Quranic Cornerstone. All rights reserved.
           </p>
           <p className="flex items-center text-sm text-muted-foreground mt-2 md:mt-0">
-            Made with <Heart size={14} className="mx-1 text-red-500" /> for the Ummah
+            برمجة وتطوير Bn0mar
           </p>
         </div>
       </div>
