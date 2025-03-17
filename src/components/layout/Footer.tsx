@@ -2,12 +2,6 @@ import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { TikTok } from 'lucide-react';
 
-const VerifiedIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 text-blue-500 ml-2">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2l4-4m1-3a9 9 0 11-6.032 15.338m4.032-2.338a9 9 0 110-12.676" />
-  </svg>
-);
-
 const Footer = () => {
   const year = new Date().getFullYear();
   
@@ -55,7 +49,6 @@ const Footer = () => {
             <a href="https://www.tiktok.com/@m0usa_0mar" target="_blank" rel="noopener noreferrer" className="flex items-center">
               <TikTok className="mr-2" /> {/* استخدام أيقونة TikTok */}
               m0usa_0mar
-              <VerifiedIcon /> {/* استخدام أيقونة التوثيق */}
             </a>
           </p>
           <p className="flex items-center text-sm text-muted-foreground mt-2 md:mt-0">
