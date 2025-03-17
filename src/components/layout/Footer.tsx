@@ -9,9 +9,9 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Quranic Cornerstone</h3>
+            <h3 className="text-lg font-medium">ركن القرآن</h3>
             <p className="text-sm text-muted-foreground">
-              An elegant Islamic application with Quran, Hadith, and Prayer Times.
+              تطبيق إسلامي أنيق يحتوي على القرآن الكريم، الحديث، وأوقات الصلاة.
             </p>
           </div>
           
@@ -45,7 +45,7 @@ const Footer = () => {
         
         <div className="border-t border-border mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            &copy; {year} Quranic Cornerstone. All rights reserved.
+            &copy; {year} ركن القرآن. جميع الحقوق محفوظة.
           </p>
           <p className="flex items-center text-sm text-muted-foreground mt-2 md:mt-0">
             برمجة وتطوير Bn0mar
