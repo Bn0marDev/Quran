@@ -24,8 +24,8 @@ const HADITH_COLLECTIONS = [
   { id: 'bukhari', name: 'Sahih al-Bukhari', hadiths_count: 7563 },
   { id: 'muslim', name: 'Sahih Muslim', hadiths_count: 5362 },
   { id: 'abu-dawud', name: 'Sunan Abi Dawud', hadiths_count: 4590 },
-  { id: 'tirmidhi', name: 'Jami' at-Tirmidhi', hadiths_count: 3891 },
-  { id: 'nasai', name: "Sunan an-Nasa'i", hadiths_count: 5662 },
+  { id: 'tirmidhi', name: 'Jami\' at-Tirmidhi', hadiths_count: 3891 },
+  { id: 'nasai', name: 'Sunan an-Nasa\'i', hadiths_count: 5662 },
   { id: 'ibn-majah', name: 'Sunan Ibn Majah', hadiths_count: 4332 },
   { id: 'malik', name: 'Muwatta Malik', hadiths_count: 1594 },
   { id: 'riyad', name: 'Riyad as-Saliheen', hadiths_count: 1896 }
