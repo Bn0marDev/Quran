@@ -34,7 +34,7 @@ const HadithCollection = ({ collections, selectedCollection, onSelectCollection,
     return (
       <Card className="animate-pulse">
         <CardHeader>
-          <CardTitle>Hadith Collections</CardTitle>
+          <CardTitle>مجموعات الأحاديث</CardTitle>
           <div className="h-10 bg-secondary/50 rounded-md w-full mt-2"></div>
         </CardHeader>
         <CardContent>
@@ -51,11 +51,11 @@ const HadithCollection = ({ collections, selectedCollection, onSelectCollection,
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Hadith Collections</CardTitle>
+        <CardTitle>مجموعات الأحاديث</CardTitle>
         <div className="relative mt-2">
           <input
             type="text"
-            placeholder="Search collections..."
+            placeholder="البحث في المجموعات..."
             className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             value={searchTerm}
             onChange={handleSearch}
@@ -68,14 +68,14 @@ const HadithCollection = ({ collections, selectedCollection, onSelectCollection,
           {filteredCollections.map((collection) => (
             <Button
               key={collection.name}
-              variant={selectedCollection === collection.name ? 'primary' : 'outline'}
+              variant={selectedCollection === collection.name ? "default" : "outline"}
               className="h-auto py-3 justify-start text-left"
               onClick={() => onSelectCollection(collection.name)}
             >
               <div className="flex flex-col">
                 <span className="font-medium">{collection.title}</span>
                 <span className="text-xs text-muted-foreground mt-1">
-                  {collection.numHadith} hadiths
+                  {collection.numHadith} حديث
                 </span>
               </div>
             </Button>

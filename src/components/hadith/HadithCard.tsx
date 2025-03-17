@@ -1,19 +1,25 @@
 
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Share2, Copy, ExternalLink, BookOpen } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface HadithCardProps {
   hadith: any;
 }
 
 const HadithCard = ({ hadith }: HadithCardProps) => {
+  const { toast } = useToast();
+  
   const handleCopy = () => {
     if (!hadith) return;
     
     const content = `${hadith.title}\n\n${hadith.text}\n\n${hadith.reference}`;
     navigator.clipboard.writeText(content);
-    // Show toast notification here
+    toast({
+      title: "تم النسخ",
+      description: "تم نسخ الحديث إلى الحافظة",
+    });
   };
   
   const handleShare = async () => {
@@ -31,7 +37,10 @@ const HadithCard = ({ hadith }: HadithCardProps) => {
       }
     } else {
       handleCopy();
-      // Show toast notification with copy success message
+      toast({
+        title: "تم النسخ",
+        description: "تم نسخ الحديث للمشاركة لأن المتصفح لا يدعم ميزة المشاركة",
+      });
     }
   };
 
@@ -41,9 +50,9 @@ const HadithCard = ({ hadith }: HadithCardProps) => {
         <CardContent className="h-full flex items-center justify-center p-6">
           <div className="text-center max-w-md mx-auto">
             <BookOpen className="h-12 w-12 mx-auto opacity-20 mb-4" />
-            <h3 className="text-xl font-medium mb-2">Select a Hadith</h3>
+            <h3 className="text-xl font-medium mb-2">اختر حديثًا</h3>
             <p className="text-muted-foreground">
-              Choose a collection and a hadith to begin reading.
+              اختر مجموعة وحديثًا للبدء في القراءة.
             </p>
           </div>
         </CardContent>
@@ -52,9 +61,9 @@ const HadithCard = ({ hadith }: HadithCardProps) => {
   }
 
   return (
-    <Card glass hover className="overflow-hidden h-full flex flex-col">
+    <Card className="overflow-hidden h-full flex flex-col">
       <CardHeader>
-        <CardTitle>{hadith.title || 'Hadith'}</CardTitle>
+        <CardTitle>{hadith.title || 'حديث'}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow">
         {hadith.arabic && (
@@ -64,20 +73,20 @@ const HadithCard = ({ hadith }: HadithCardProps) => {
         )}
         <p className="mb-4">{hadith.text}</p>
         <div className="text-sm text-muted-foreground">
-          <p><strong>Reference:</strong> {hadith.reference}</p>
-          {hadith.grade && <p><strong>Grade:</strong> {hadith.grade}</p>}
+          <p><strong>المرجع:</strong> {hadith.reference}</p>
+          {hadith.grade && <p><strong>الدرجة:</strong> {hadith.grade}</p>}
         </div>
       </CardContent>
       <CardFooter className="border-t border-border bg-secondary/10 p-3 flex justify-between">
         <div className="text-sm text-muted-foreground">
-          Hadith #{hadith.number}
+          حديث #{hadith.number}
         </div>
         <div className="flex space-x-2">
           <Button variant="ghost" size="sm" onClick={handleCopy}>
-            <Copy className="h-4 w-4 mr-1" /> Copy
+            <Copy className="h-4 w-4 mr-1" /> نسخ
           </Button>
           <Button variant="ghost" size="sm" onClick={handleShare}>
-            <Share2 className="h-4 w-4 mr-1" /> Share
+            <Share2 className="h-4 w-4 mr-1" /> مشاركة
           </Button>
         </div>
       </CardFooter>
