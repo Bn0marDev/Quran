@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from '@/components/ui/use-toast';
+import { fetchHadithsByCollection } from '@/lib/api';
 
 // Define types for Hadith data
 export type HadithCollection = {
@@ -31,85 +32,6 @@ const HADITH_COLLECTIONS = [
   { id: 'riyad', name: 'رياض الصالحين', hadiths_count: 1896 }
 ];
 
-// Function to fetch hadiths by collection
-const fetchHadithsByCollection = async (collection: string) => {
-  if (!collection) return [];
-
-  try {
-    // استعمال API حقيقي لجلب الأحاديث
-    const response = await fetch(`https://api.hadith.gading.dev/books/${collection}?range=1-20`);
-    
-    if (!response.ok) {
-      throw new Error('فشل في جلب الأحاديث');
-    }
-    
-    const data = await response.json();
-    
-    // تحويل البيانات إلى الشكل المطلوب
-    const hadiths = data.hadiths?.map((hadith: any) => ({
-      id: hadith.number.toString(),
-      title: `حديث رقم ${hadith.number}`,
-      text: hadith.arab,
-      translation: hadith.id,
-      number: hadith.number,
-      reference: collection
-    })) || [];
-    
-    return hadiths;
-  } catch (error) {
-    console.error(`Error fetching hadiths for collection ${collection}:`, error);
-    
-    // بيانات وهمية في حالة فشل جلب البيانات
-    return [
-      {
-        id: '1',
-        title: 'كتاب الإيمان',
-        text: 'عن عمر بن الخطاب رضي الله عنه قال: بينما نحن جلوس عند رسول الله صلى الله عليه وسلم ذات يوم إذ طلع علينا رجل شديد بياض الثياب شديد سواد الشعر لا يرى عليه أثر السفر ولا يعرفه منا أحد حتى جلس إلى النبي صلى الله عليه وسلم فأسند ركبتيه إلى ركبتيه ووضع كفيه على فخذيه وقال: يا محمد أخبرني عن الإسلام. فقال رسول الله صلى الله عليه وسلم: "الإسلام أن تشهد أن لا إله إلا الله وأن محمداً رسول الله وتقيم الصلاة وتؤتي الزكاة وتصوم رمضان وتحج البيت إن استطعت إليه سبيلا".',
-        chapter: 'الإيمان',
-        number: 1,
-        reference: 'البخاري 1، مسلم 8',
-        grade: 'صحيح'
-      },
-      {
-        id: '2',
-        title: 'إنما الأعمال بالنيات',
-        text: 'عن عمر بن الخطاب رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "إنما الأعمال بالنيات وإنما لكل امرئ ما نوى. فمن كانت هجرته إلى الله ورسوله فهجرته إلى الله ورسوله، ومن كانت هجرته لدنيا يصيبها أو امرأة ينكحها فهجرته إلى ما هاجر إليه".',
-        chapter: 'الوحي',
-        number: 1,
-        reference: 'البخاري 1، مسلم 1907',
-        grade: 'صحيح'
-      },
-      {
-        id: '3',
-        title: 'ملك الموت',
-        text: 'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "كان ملك الموت يأتي الناس عياناً، فأتى موسى عليه السلام فلطمه ففقأ عينه، فرجع إلى ربه فقال: أرسلتني إلى عبد لا يريد الموت. فرد الله عليه عينه وقال: ارجع إليه وقل له يضع يده على متن ثور، فله بكل شعرة تغطيها يده سنة يعيشها".',
-        chapter: 'الأنبياء',
-        number: 339,
-        reference: 'البخاري 3407، مسلم 2372',
-        grade: 'صحيح'
-      },
-      {
-        id: '4',
-        title: 'السبع الموبقات',
-        text: 'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "اجتنبوا السبع الموبقات". قالوا: يا رسول الله وما هن؟ قال: "الشرك بالله، والسحر، وقتل النفس التي حرم الله إلا بالحق، وأكل الربا، وأكل مال اليتيم، والتولي يوم الزحف، وقذف المحصنات المؤمنات الغافلات".',
-        chapter: 'الإيمان',
-        number: 85,
-        reference: 'البخاري 2766، مسلم 89',
-        grade: 'صحيح'
-      },
-      {
-        id: '5',
-        title: 'خمس من الفطرة',
-        text: 'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "خمس من الفطرة: الختان، والاستحداد، وقص الشارب، ونتف الإبط، وتقليم الأظفار".',
-        chapter: 'الطهارة',
-        number: 53,
-        reference: 'البخاري 5889، مسلم 257',
-        grade: 'صحيح'
-      }
-    ];
-  }
-};
-
 export const useHadith = () => {
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
 
@@ -124,9 +46,10 @@ export const useHadith = () => {
     refetch
   } = useQuery({
     queryKey: ['hadiths', selectedCollection],
-    queryFn: () => fetchHadithsByCollection(selectedCollection || ''),
+    queryFn: () => selectedCollection ? fetchHadithsByCollection(selectedCollection, 20) : Promise.resolve([]),
     enabled: !!selectedCollection,
     staleTime: 1000 * 60 * 60, // 1 hour
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
     refetchOnWindowFocus: false
   });
 
@@ -144,14 +67,12 @@ export const useHadith = () => {
     }
   }, [selectedCollection, refetch]);
 
-  // When collection changes, fetch hadiths
+  // When component mounts, check for last selected collection in localStorage
   useEffect(() => {
-    // Check for last selected collection in localStorage
     const lastSelectedCollection = localStorage.getItem('lastSelectedHadithCollection');
     if (lastSelectedCollection && !selectedCollection) {
       try {
-        const parsedCollection = JSON.parse(lastSelectedCollection);
-        setSelectedCollection(parsedCollection);
+        setSelectedCollection(JSON.parse(lastSelectedCollection));
       } catch (error) {
         console.error('Error parsing last selected hadith collection:', error);
       }

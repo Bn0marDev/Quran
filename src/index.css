@@ -94,11 +94,26 @@
 
   html {
     direction: rtl;
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='currentColor' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%2347647a' fill-opacity='0.05'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 37a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm10-17h20v20H20V20zm-10 57a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm10-17h20v20H20V60zM30 77a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM50 40h20v20H50V40zm-10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm10-57h20v20H50V0zM70 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM30 37a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM30 77a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM30 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 20h20v20H30V37zm20 0h20v20H50V37zm0 20h20v20H50V57zM70 57a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 20a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0-57a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM50 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 20a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm-40 60a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM70 37a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0-20a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 60a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM30 57a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20-20a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 40a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 57a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM70 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM30 57a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 77a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm40-40a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 20a7 7 0 1 0 0-14 7 7 0 0 0 0 14z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+    animation: gradientBackground 15s ease infinite;
+    background-attachment: fixed;
+  }
+
+  @keyframes gradientBackground {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -107,6 +122,13 @@
 
   .arabic {
     @apply font-arabic;
+  }
+
+  /* Added padding at the bottom for mobile nav */
+  @media (max-width: 768px) {
+    main {
+      padding-bottom: 70px;
+    }
   }
 }
 
@@ -145,6 +167,11 @@
   
   .card-hover {
     @apply transition-all duration-300 hover:shadow-elevation hover:-translate-y-1;
+  }
+
+  /* Glass effect for cards */
+  .glass {
+    @apply backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/20 dark:border-white/10 shadow-glass;
   }
 }
 

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Moon, Sun, Volume2, RefreshCw, Trash2 } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 import { useQuran } from '@/hooks/useQuran';
@@ -42,7 +42,7 @@ const SettingsPanel = () => {
 
   return (
     <div className="space-y-6">
-      <Card glass hover>
+      <Card>
         <CardHeader>
           <CardTitle>Appearance</CardTitle>
         </CardHeader>
@@ -67,7 +67,7 @@ const SettingsPanel = () => {
         </CardContent>
       </Card>
       
-      <Card glass hover>
+      <Card>
         <CardHeader>
           <CardTitle>Quran Settings</CardTitle>
         </CardHeader>
@@ -81,7 +81,7 @@ const SettingsPanel = () => {
                 {recitersList.map((reciter) => (
                   <Button
                     key={reciter.id}
-                    variant={selectedReciter?.id === reciter.id ? 'primary' : 'outline'}
+                    variant={selectedReciter?.id === reciter.id ? 'default' : 'outline'}
                     className="justify-start h-auto py-3"
                     onClick={() => setSelectedReciter(reciter)}
                   >
@@ -98,7 +98,7 @@ const SettingsPanel = () => {
         </CardContent>
       </Card>
       
-      <Card glass hover>
+      <Card>
         <CardHeader>
           <CardTitle>Storage</CardTitle>
         </CardHeader>
