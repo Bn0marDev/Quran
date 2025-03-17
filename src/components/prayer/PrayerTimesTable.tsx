@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/Button';
 import { MapPin, Calendar, Clock, Bell, BellOff } from 'lucide-react';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
@@ -125,7 +125,7 @@ const PrayerTimesTable = () => {
                   </div>
                   <div className="flex items-center">
                     <div className="text-lg font-medium">
-                      {formatTime(time as string)}
+                      {formatTime(time)}
                     </div>
                     {name !== 'Sunrise' && (
                       <Button 

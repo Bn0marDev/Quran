@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import PrayerTimesTable from '@/components/prayer/PrayerTimesTable';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { MapPin } from 'lucide-react';
 
 const PrayerTimes = () => {
